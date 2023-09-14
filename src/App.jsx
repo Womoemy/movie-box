@@ -1,11 +1,16 @@
-import './App.css'
+
+import Footer from "./Footer";
+import Header from "./Header";
+import Featured from "./Featured";
 
 const App = () => {
-  console.log("Hello from component")
+  
   return (
-    <div>
-      <h2>Hello, MovieBox</h2>
-    </div>
-  )
-}
-export default App
+    <>
+      <Header />
+      <Featured />
+      <Footer />
+    </>
+  );
+};
+export default App;
