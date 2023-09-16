@@ -2,13 +2,15 @@ import { ReactComponent as Logo } from "./assets/Logo.svg";
 import header_backdrop from "./assets/header_backdrop.png";
 import { ReactComponent as Menu } from "./assets/Menu.svg";
 // import Button from "./Button";
+import Imdb_img from "./assets/imdb.svg";
+import Rt_img  from "./assets/tomatoes.svg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons'
 
 const Header = () => {
   // const BACKDROP_BASE_URL = "https://image.tmdb.org/t/p/original"
-  const IMDB_IMG = "src/assets/imdb.svg";
-  const RT_IMG = "src/assets/tomatoes.svg";
+  // const IMDB_IMG = "./assets/imdb.svg";
+  // const RT_IMG = "./assets/tomatoes.svg";
 
   return (
     <div
@@ -30,11 +32,11 @@ const Header = () => {
         <h1 className="font-bold text-5xl leading-[56px]">John Wick 3 : Parabellum</h1>
         <div className="flex w-[184px] h-5 justify-between">
           <span className="flex gap-2.5 items-center">
-            <img src={`${IMDB_IMG}`} alt="IMDb" style={{ width: "35px", }} />
+            <img src={Imdb_img} alt="IMDb" style={{ width: "35px", }} />
             <span className="text-xs">8.6 / 10</span>
           </span>
           <span className="flex gap-2.5 items-center">
-            <img src={`${RT_IMG}`} alt="Rotten Tomatoes" />
+            <img src={Rt_img} alt="Rotten Tomatoes" />
             <span className="text-xs">97%</span>
           </span>
         </div>

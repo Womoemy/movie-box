@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import Imdb_img from "./assets/imdb.svg";
+import Rt_img  from "./assets/tomatoes.svg"
 
 /* eslint-disable react/prop-types */
 const Movie = ({ movie }) => {
   const POSTER_BASE_URL = "https://image.tmdb.org/t/p/w342";
-  const IMDB_IMG = "src/assets/imdb.svg";
-  const RT_IMG = "src/assets/tomatoes.svg";
+  // const IMDB_IMG = "movie-box/src/assets/imdb.svg";
+  // const RT_IMG = "movie-box/src/assets/tomatoes.svg";
 
   const rt_rating = movie.popularity;
   const rating1dp = rt_rating.toFixed(1);
@@ -34,11 +36,12 @@ const Movie = ({ movie }) => {
       </h3>
       <div className="flex justify-between">
         <span className="flex gap-2.5">
-          <img src={`${IMDB_IMG}`} alt="IMDb" />
+          {/* <Imdb_img /> */}
+          <img src={Imdb_img} alt="IMDB Rating" />
           <span>{movie.vote_average} / 10</span>
         </span>
         <span className="flex gap-2.5">
-          <img src={`${RT_IMG}`} alt="Rotten Tomatoes" />
+        <img src={Rt_img} alt="Rotten Tomatoes Rating" />
           <span>{rating1dp}%</span>
         </span>
       </div>
