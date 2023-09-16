@@ -1,12 +1,62 @@
-// import { useParams } from "react-router-dom";
+/* eslint-disable react/prop-types */
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faList, faStar } from "@fortawesome/free-solid-svg-icons";
 import { ReactComponent as Tickets } from "./assets/tickets.svg";
 import upcoming_movies_backdrop from "./assets/upcoming-bg.png"
+// import Movie from "./Movie";
+// import { useEffect, useState } from "react";
+
 
 const Movies = () => {
-    console.log("You are on the movies details page");
+    const { id } = useParams();
+    const API_KEY = "2876d0ba5aa4f567d49e15c9d4773346"; 
+    const ALL_DETAILS_URL = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos,credits`;
+    // const BACKDROP_BASE_URL = "https://image.tmdb.org/t/p/w1280";
     
+    const [movieDetails, setMovieDetails] = useState([]);
+
+    useEffect(() => {
+        fetchMovieDetails();
+    });
+
+    const fetchMovieDetails = async () => {
+        const data = await fetch(ALL_DETAILS_URL);
+        const movieDetails = await data.json();
+        console.log(movieDetails)
+        setMovieDetails(movieDetails);
+    }
+    // object variables
+    const title = movieDetails.original_title;
+
+    function customUTCDateString(date) {
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const months = [
+          'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ];
+      
+        const dayOfWeek = daysOfWeek[date.getUTCDay()];
+        const dayOfMonth = date.getUTCDate();
+        const month = months[date.getUTCMonth()];
+        const year = date.getUTCFullYear();
+      
+        return `${dayOfWeek}, ${dayOfMonth} ${month} ${year}`;
+    }
+    const dateString = movieDetails.release_date;
+    const dateObject = new Date(dateString);
+    const release_date = customUTCDateString(dateObject);
+      
+    const runtime = movieDetails.runtime;
+
+    const overview = movieDetails.overview;
+    // console.log(movieDetails);
+    const youtube_key = movieDetails?.videos?.results[0].key;
+    // console.log(movieDetails.videos.results[0].key);
+    // const backdrop_path = movieDetails.images.backdrops[0].file_path;
+    // const backdrop_img = `${BACKDROP_BASE_URL}${backdrop_path}`;
+
     return (
         <div className="flex w-screen max-w-full">
             <div className="w-1/6"></div>
@@ -15,7 +65,7 @@ const Movies = () => {
                     className="w-full h-96 rounded-2xl"
                     // width="560" 
                     // height="315" 
-                    src="https://www.youtube.com/embed/Ma1-sIoZnMs" 
+                    src={`https://www.youtube.com/embed/${youtube_key}`}
                     title="YouTube video player" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                     allowFullScreen
@@ -25,20 +75,17 @@ const Movies = () => {
                     <div className="flex flex-col gap-y-5 w-2/3">
                         <div className="flex gap-x-4 items-center">
                             {/* movie details container */}
-                            <div><span>The GodFather</span> &middot; <span>1972</span> &middot; <span>172m</span></div>
+                            <p className="font-bold text-xl"><span className="font-normal" data-testid="movie-title">{title}</span> &middot; <span className="font-normal" data-testid="movie-release-date">{release_date}</span> &middot; <span className="font-normal" data-testid="movie-runtime">{runtime}m</span></p>
                             {/* movie genres container */}
                             <div className="flex gap-x-3">
                                 <span className="border border-solid border-pink-100 rounded-2xl text-red-700 py-1 px-5 h-8">Drama</span>
                                 <span className="border border-solid border-pink-100 rounded-2xl text-red-700 py-1 px-5 h-8">Crime</span>
                             </div>
                         </div>
-                        <p className="">
-                            {/* movie overview */}
-                            Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. 
-                            When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, 
-                            Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.
+                        <p className="text-xl"data-testid="movie-overview">
+                            {overview}
                         </p>
-                        <div className="flex flex-col gap-y-7">
+                        <div className="flex flex-col gap-y-7 text-xl">
                             {/* movie credits */}
                             <p>
                                 {/* director - endpoint: crew.job["Director"][name] */}
@@ -53,7 +100,7 @@ const Movies = () => {
                                 Stars: <span className="text-rose-700">Tom Cruise, Jennifer Connelly, Miles Teller</span>
                             </p>
                         </div>
-                        <div className="flex border border-solid border-gray-400 items-center w-full h-12 rounded-xl">
+                        <div className="flex border border-solid border-gray-400 items-center w-full h-12 rounded-xl text-xl">
                             {/* mentions */}
                             <span className="text-white bg-rose-700 px-5 py-3 rounded-xl w-auto h-12 whitespace-nowrap">
                                 {/* top rated ranking */}
@@ -83,7 +130,7 @@ const Movies = () => {
                                 </span> | <span>350k</span>
                             </div>
                         </div>
-                        <div className="flex flex-col gap-y-3">
+                        <div className="flex flex-col gap-y-3 text-xl">
                             <div className="flex items-center text-white bg-rose-700 px-20 py-3 rounded-xl w-auto h-12 whitespace-nowrap">
                                 <span className="flex gap-x-3 items-center">
                                     <Tickets />See Showtimes

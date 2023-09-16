@@ -1,4 +1,13 @@
-# STAGE 2 TASK
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## STAGE 2 TASK
 
 ## Objective
 
@@ -52,12 +61,3 @@ The deadline for submissions is 14th September 2023, 11:59 PM GMT. Late submissi
 Link to submission form again: https://docs.google.com/forms/d/e/1FAIpQLSf-oxF8XvHCuCiBg3ktBxuNxk2tPk2SQq_-02sx7TBQlBd7Xg/viewform
 PPS: THE API MIGHT NOT RETURN ALL THE INFO ON THE SECOND PAGE OF THE DESIGN, ADD THE ESSENTIAL ONES THAT ARE LISTEN ABOVE. THE SIDEBAR DOESN'T NEED TO BE FUNCTIONAL.
 YOU MAY USE ANY CSS FRAMEWORK/LIBRARY OF YOUR CHOICE (edited)
-
-## React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
