@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faList, faStar } from "@fortawesome/free-solid-svg-icons";
 import { ReactComponent as Tickets } from "./assets/tickets.svg";
-import upcoming_movies_backdrop from "./assets/upcoming-bg.png"
+import upcoming_movies_backdrop from "./assets/upcoming-bg.png";
+import SideMenu from "./SideMenu";
 // import Movie from "./Movie";
 // import { useEffect, useState } from "react";
 
@@ -59,7 +60,8 @@ const Movies = () => {
 
     return (
         <div className="flex w-screen max-w-full">
-            <div className="w-1/6"></div>
+            {/* <div className="w-1/6"></div> */}
+            <SideMenu />
             <div className="w-5/6 p-9">
                 <iframe 
                     className="w-full h-96 rounded-2xl"
@@ -78,8 +80,8 @@ const Movies = () => {
                             <p className="font-bold text-xl"><span className="font-normal" data-testid="movie-title">{title}</span> &middot; <span className="font-normal" data-testid="movie-release-date">{release_date}</span> &middot; <span className="font-normal" data-testid="movie-runtime">{runtime}m</span></p>
                             {/* movie genres container */}
                             <div className="flex gap-x-3">
-                                <span className="border border-solid border-pink-100 rounded-2xl text-red-700 py-1 px-5 h-8">Drama</span>
-                                <span className="border border-solid border-pink-100 rounded-2xl text-red-700 py-1 px-5 h-8">Crime</span>
+                                <span className="border border-solid border-pink-100 rounded-full text-red-700 py-1 px-5 h-8">Drama</span>
+                                <span className="border border-solid border-pink-100 rounded-full text-red-700 py-1 px-5 h-8">Crime</span>
                             </div>
                         </div>
                         <p className="text-xl"data-testid="movie-overview">
