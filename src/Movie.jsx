@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 /* eslint-disable react/prop-types */
 const Movie = ({ movie }) => {
   const POSTER_BASE_URL = "https://image.tmdb.org/t/p/w342";
@@ -13,6 +15,7 @@ const Movie = ({ movie }) => {
   // }
 
   return (
+    <Link to={`movies/${movie.id}`}>
     <div data-testid="movie-card" className="flex flex-col gap-y-3">
       <img
         data-testid="movie-poster"
@@ -43,7 +46,8 @@ const Movie = ({ movie }) => {
         {/* `${GENRE_BASE_URL}/` */}
         Action, Adventure
       </p>
-    </div>
+    </div> 
+    </Link>
   );
 };
 export default Movie;
