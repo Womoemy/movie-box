@@ -6,25 +6,27 @@
 - Git
 
 ## Steps
-1. Clone Repository
-
+1. **Clone Repository**
 *HTTPS*
-`git clone https://github.com/Womoemy/movie-box.git`
-
+```sh
+git clone https://github.com/Womoemy/movie-box.git
+```
 *SSH*
-`git clone git@github.com:Womoemy/movie-box.git`
+```sh 
+git clone git@github.com:Womoemy/movie-box.git
+```
 
-2. Navigate to the project directory
-
-`cd movie-box`
+2. **Navigate to the project directory**
+```sh
+cd movie-box```
 
 3. Install dependencies
-
-`npm install`
+```sh
+npm install```
 
 4. Start the development server
-
-`npm run dev`
+```sh
+npm run dev```
 
 ## React + Vite
 
