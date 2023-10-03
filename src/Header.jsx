@@ -26,7 +26,7 @@ const Header = () => {
       }}
     >
       <NavBar />
-      <div className="flex flex-col gap-y-4 absolute bottom-0 mx-4 my-8 w-3/4 md:static md:w-1/3 ">
+      <div className="flex flex-col gap-y-4 absolute bottom-0 mx-4 my-20 w-3/4 md:static md:w-1/3 ">
         <h1 className="font-bold text-3xl md:text-5xl leading-10 md:leading-[56px]">John Wick 3 : Parabellum</h1>
         <div className="flex w-[184px] h-5 justify-between">
           <span className="flex gap-2.5 items-center">

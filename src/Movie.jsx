@@ -8,6 +8,7 @@ const Movie = ({ movie }) => {
   // const IMDB_IMG = "movie-box/src/assets/imdb.svg";
   // const RT_IMG = "movie-box/src/assets/tomatoes.svg";
 
+  // console.log(movie.poster_path);
   const rt_rating = movie.popularity;
   const rating1dp = rt_rating.toFixed(1);
   // const GENRE_BASE_URL = "https://api.themoviedb.org/3/genre/movie/list"
