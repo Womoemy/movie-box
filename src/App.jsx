@@ -23,7 +23,7 @@ const App = () => {
   };
 
 
-  return (
+  return toprated.length > 0 ? (
     <>
       <Header key={toprated.id} movies={toprated} />
       <Featured key={toprated.id} movies={toprated} />
@@ -31,6 +31,6 @@ const App = () => {
       <Featured /> */}
       <Footer />
     </>
-  );
+  ): <h1>Loading</h1>;
 };
 export default App;

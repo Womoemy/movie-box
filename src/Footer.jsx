@@ -7,7 +7,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
-  console.log("I am the footer");
   return (
     <div className="bottom-0 py-16">
       <div className="mx-auto flex w-60 justify-between">
