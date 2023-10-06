@@ -2,6 +2,8 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Featured from "./Featured";
 // import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
 const App = () => {
@@ -31,6 +33,9 @@ const App = () => {
       <Featured /> */}
       <Footer />
     </>
-  ): <h1>Loading</h1>;
+  ): <div>
+      Loading 
+      <FontAwesomeIcon icon={faSpinner} spinPulse size="2xl" />
+    </div>;
 };
 export default App;

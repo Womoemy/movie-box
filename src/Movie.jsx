@@ -19,12 +19,13 @@ const Movie = ({ movie }) => {
 
   return (
     <Link to={`movies/${movie.id}`}>
-    <div data-testid="movie-card" className="flex flex-col gap-y-3">
+    <div data-testid="movie-card" className="flex flex-col gap-y-3 w-[250px] md:w-auto">
       <img
         data-testid="movie-poster"
         src={`${POSTER_BASE_URL}${movie.poster_path}`}
         alt={movie.path}
         style={{ width: 250, height: 370 }}
+        // style={{ height: 370 }}
       />
       <p
         data-testid="movie-release-date"

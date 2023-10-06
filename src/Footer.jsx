@@ -1,40 +1,48 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFacebook,
-  faInstagram,
+  faLinkedin,
+  faSquareInstagram,
   faSquareXTwitter,
-  faYoutube,
+  faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div className="bottom-0 py-16">
       <div className="mx-auto flex w-60 justify-between">
-        <FontAwesomeIcon
-          icon={faFacebook}
-          style={{ color: "#111827", height: 24, width: 24 }}
-        />
-        <FontAwesomeIcon
-          icon={faInstagram}
-          style={{ color: "#111827", height: 24, width: 24 }}
-        />
-        <FontAwesomeIcon
-          icon={faSquareXTwitter}
-          style={{ color: "#111827", height: 24, width: 24 }}
-        />
-        <FontAwesomeIcon
-          icon={faYoutube}
-          style={{ color: "#111827", height: 24, width: 24 }}
-        />
+        <Link to="https://www.linkedin.com/in/womo-emmanuel-ebiobowei/" target="_blank">
+          <FontAwesomeIcon 
+            icon={faLinkedin}
+            style={{ color: "#111827", height: 24, width: 24 }} 
+          />
+        </Link>
+        <Link to="https://twitter.com/womoemy" target="_blank">
+          <FontAwesomeIcon
+            icon={faSquareXTwitter}
+            style={{ color: "#111827", height: 24, width: 24 }}
+          />
+        </Link>
+        <Link to="https://github.com/Womoemy" target="_blank">
+          <FontAwesomeIcon 
+            icon={faGithub}
+            style={{ color: "#111827", height: 24, width: 24 }} 
+          />
+        </Link>
+        <Link to="https://www.instagram.com/womoemy/" target="_blank">
+          <FontAwesomeIcon
+            icon={faSquareInstagram}
+            style={{ color: "#111827", height: 24, width: 24 }}
+          />
+        </Link>
       </div>
-      <div className="my-9 mx-auto flex justify-between w-1/3">
-        <p className="font-bold text-gray-900">Conditions of Use</p>
-        <p className="font-bold text-gray-900">Privacy & Policy</p>
-        <p className="font-bold text-gray-900">Press Room</p>
-      </div>
-      <div className="mx-auto">
-        <p className="text-center text-gray-500 font-bold">
-          &copy; 2023 Design by Adriana Eka Prayudha
+    
+      <div className="mt-9 mx-auto">
+        <p className="text-center text-sm text-gray-500 font-bold">
+          &copy; 2023 Womo Ebiobowei 
+        </p>
+        <p className="text-center text-xs text-gray-500 font-bold">
+          Design by Adriana Eka Prayudha
         </p>
       </div>
     </div>

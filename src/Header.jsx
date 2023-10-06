@@ -16,11 +16,6 @@ const Header = ({ movies }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const [currentMovie, setCurrentMovie] = useState(movies[currentIndex])
-  // const BGIMAGEPATH = movies[currentIndex].backdrop_path;
-  // console.log(movies[currentIndex].backdrop_path);
-  // const BACKDROP_URL = `${BASE_URL}${BGIMAGEPATH}`;
-  // const MOVIE_TITLE = movies[currentIndex]['title'];
-  // console.log(movies[currentIndex]['title']);
   
   const backdrop_img = useMemo(() => {
     return `${BASE_URL}${currentMovie.backdrop_path}`
@@ -39,8 +34,6 @@ const Header = ({ movies }) => {
     return () => clearTimeout(timer);
   }, [currentIndex, movies])
   
-  console.log(movies);
-
   return (
     // <>
     //   {movies.map((movie) => 
