@@ -10,7 +10,8 @@ const Movie = ({ movie }) => {
 
   // console.log(movie.poster_path);
   const rt_rating = movie.popularity;
-  const rating1dp = rt_rating.toFixed(1);
+  // const ratingInt = rt_rating.toFixed(1);
+  const ratingInt = Math.round(rt_rating);
   // const GENRE_BASE_URL = "https://api.themoviedb.org/3/genre/movie/list"
 
   // const fetchGenre = async () => {
@@ -44,7 +45,7 @@ const Movie = ({ movie }) => {
         </span>
         <span className="flex gap-2.5">
         <img src={Rt_img} alt="Rotten Tomatoes Rating" />
-          <span>{rating1dp}%</span>
+          <span>{ratingInt}%</span>
         </span>
       </div>
       <p className="text-gray-400 test-sm font-bold">

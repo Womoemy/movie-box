@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState, useMemo } from "react";
 
-const Header = ({ movies }) => {
+const Header = ({ movies, onToggleBlur, openSearchModal }) => {
   const BASE_URL = "https://image.tmdb.org/t/p/original";
 
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -40,6 +40,7 @@ const Header = ({ movies }) => {
           <div 
             // key={movie.id}
             className="h-screen text-white"
+            // className={`h-screen text-white ${onToggleBlur ? 'backdrop-blur' : ''}`}
             style={{
               backgroundImage: `url(${backdrop_img})`,
               backgroundRepeat: "no-repeat",
@@ -50,8 +51,11 @@ const Header = ({ movies }) => {
               // width: "100vw",
             }}
           >
-            <NavBar />
-            <div className="flex flex-col gap-y-4 absolute bottom-0 mx-4 my-20 w-3/4 md:static md:w-1/3 ">
+            <NavBar 
+              onToggleBlur={onToggleBlur}
+              openSearchModal={openSearchModal} 
+            />
+            <div className="flex flex-col gap-y-4 bottom-0 mx-4 w-3/4 md:static md:w-1/3 ">
               <h1 className="font-bold text-3xl md:text-5xl leading-10 md:leading-[56px]">
                 {currentMovie.title}
               </h1>
