@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState, useMemo } from "react";
 
-const Header = ({ movies, onToggleBlur, openSearchModal }) => {
+const Header = ({ movies }) => {
   const BASE_URL = "https://image.tmdb.org/t/p/original";
 
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -52,8 +52,9 @@ const Header = ({ movies, onToggleBlur, openSearchModal }) => {
             }}
           >
             <NavBar 
-              onToggleBlur={onToggleBlur}
-              openSearchModal={openSearchModal} 
+              // onToggleBlur={onToggleBlur}
+              // openSearchModal={openSearchModal} 
+              movies={movies}
             />
             <div className="flex flex-col gap-y-4 bottom-0 mx-4 w-3/4 md:static md:w-1/3 ">
               <h1 className="font-bold text-3xl md:text-5xl leading-10 md:leading-[56px]">
@@ -73,9 +74,6 @@ const Header = ({ movies, onToggleBlur, openSearchModal }) => {
                 {currentMovie.overview}
               </p>
               <div>
-                {/* <button>
-                  Watch Trailer
-                </button> */}
                 <button type="button" className="flex uppercase bg-rose-700 py-1.5 px-4 rounded-md gap-x-2">   
                   <span>
                     <FontAwesomeIcon icon={faCirclePlay} style={{color: "#ffffff",}} />
@@ -83,7 +81,6 @@ const Header = ({ movies, onToggleBlur, openSearchModal }) => {
                   Watch Trailer
                 </button>
               </div>
-              
             </div>
           </div>
     //   )}

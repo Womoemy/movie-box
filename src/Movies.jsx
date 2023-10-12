@@ -14,7 +14,6 @@ const Movies = () => {
     const { id } = useParams();
     const API_KEY = "2876d0ba5aa4f567d49e15c9d4773346"; 
     const ALL_DETAILS_URL = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos,credits`;
-    // const BACKDROP_BASE_URL = "https://image.tmdb.org/t/p/w1280";
     
     const [movieDetails, setMovieDetails] = useState([]);
 
@@ -25,11 +24,8 @@ const Movies = () => {
     const fetchMovieDetails = async () => {
         const data = await fetch(ALL_DETAILS_URL);
         const movieDetails = await data.json();
-        console.log(movieDetails)
         setMovieDetails(movieDetails);
     }
-    // object variables
-    const title = movieDetails.original_title;
 
     function customUTCDateString(date) {
         const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -45,19 +41,15 @@ const Movies = () => {
       
         return `${dayOfWeek}, ${dayOfMonth} ${month} ${year}`;
     }
+
+    const title = movieDetails.original_title;
     const dateString = movieDetails.release_date;
     const dateObject = new Date(dateString);
     const release_date = customUTCDateString(dateObject);
-      
     const runtime = movieDetails.runtime;
-
     const overview = movieDetails.overview;
-    // console.log(movieDetails);
     const youtube_key = movieDetails?.videos?.results[0].key;
-    // console.log(movieDetails.videos.results[0].key);
-    // const backdrop_path = movieDetails.images.backdrops[0].file_path;
-    // const backdrop_img = `${BACKDROP_BASE_URL}${backdrop_path}`;
-
+    
     return (
         <div className="flex w-screen max-w-full">
             {/* <div className="w-1/6"></div> */}
