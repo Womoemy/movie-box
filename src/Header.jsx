@@ -8,7 +8,7 @@ import NavBar from "./NavBar";
 import Imdb_img from "./assets/imdb.svg";
 import Rt_img  from "./assets/tomatoes.svg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlay } from '@fortawesome/free-solid-svg-icons'
+import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState, useMemo } from "react";
 
 const Header = ({ movies }) => {
@@ -39,7 +39,7 @@ const Header = ({ movies }) => {
     //   {movies.map((movie) => 
           <div 
             // key={movie.id}
-            className="h-screen text-white"
+            className="h-screen text-white px-16"
             // className={`h-screen text-white ${onToggleBlur ? 'backdrop-blur' : ''}`}
             style={{
               backgroundImage: `url(${backdrop_img})`,

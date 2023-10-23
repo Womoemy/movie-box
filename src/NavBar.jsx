@@ -18,14 +18,44 @@ const NavBar = ({ movies }) => {
         setShowSearchModal(false)
     }
 
+    const handleModalClick = (e) => {
+        e.stopPropagation();
+    }
     return (
         <>
-            <nav className="flex items-center h-20 px-4 md-px-20 border-2 border-solid border-red-700">
-                <div id="nav-wrapper" className="flex justify-between w-full">
+            <nav className="flex items-center h-20 px-4 mb-28">
+                <div id="nav-wrapper" className="flex items-center justify-between w-full">
                     <Logo />
+                    <form className="hidden md:block border-2 border-solid border-gray-300 rounded-md h-8 py-1.5 px-2.5 w-2/5">
+                        <label htmlFor="default-search" className="mb-2 text-sm font-medium text-white sr-only">Search</label>
+                        <div className="relative flex">
+                            <input 
+                                onClick={openSearchModal}
+                                autoComplete="off"
+                                className="placeholder:text-white bg-transparent block w-full h-[100%] text-sm text-white rounded-lg focus:outline-none" 
+                                type="search" 
+                                name="searchMovies" 
+                                id="searchMovies" 
+                                placeholder="What do you want to watch?" 
+                                required 
+                            />
+                            <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+                            <FontAwesomeIcon icon={faMagnifyingGlass} className={`w-4 h-4 text-white`} />
+                            </div>
+                        </div>
+                    </form>
                     <div className="flex gap-6 text-base items-center">
                         {/* <p>Sign in</p> */}
-                        <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" data-modal-target="defaultModal" data-modal-toggle="defaultModal" onClick={openSearchModal} style={{ cursor: 'pointer' }}/>
+
+                        <FontAwesomeIcon 
+                            icon={faMagnifyingGlass} 
+                            size="lg" 
+                            data-modal-target="defaultModal" 
+                            data-modal-toggle="defaultModal" 
+                            onClick={openSearchModal} 
+                            style={{ cursor: 'pointer' }}
+                            className="block md:hidden"
+                        />
                         <Menu style={{ cursor: 'pointer' }} />
                     </div>
                 </div>
@@ -34,8 +64,8 @@ const NavBar = ({ movies }) => {
             {/* Search Main modal */}
             {showSearchModal ? (
                 <>
-                    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                        <div className="relative w-full my-6 mx-auto max-w-3xl">
+                    <div onClick={closeSearchModal} className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                        <div onClick={handleModalClick} className="relative w-full my-6 mx-5 md:mx-auto max-w-3xl">
                               {/*content*/}
                             <div className="rounded-lg border-0 shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                 {/*header*/}
@@ -52,7 +82,7 @@ const NavBar = ({ movies }) => {
                             
                                 {/*body*/}
                                 <div className="relative text-slate-900 flex flex-col">
-                                    {/* <p className="px-3 py-16 self-center">No movie searches</p> */}
+                                    {/* <p className="px-3 py-16 self-center">No movie found</p> */}
                                     <section className="MovieSearch-Hits overflow-y-auto h-96">
                                         <div className="MovieSearch-Hit-source border-b border-solid px-3 py-3 font-semibold text-lg">Movies</div>
                                         <ul id="moviesearch-list" className="flex flex-col divide-y">
