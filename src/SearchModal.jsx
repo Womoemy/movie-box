@@ -2,19 +2,29 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const SearchModal = ({ movies, closeSearchModal }) => {
-  // if (!isOpen) return null;
-  const POSTER_BASE_URL = "https://image.tmdb.org/t/p/w92";
+  const POSTER_BASE_URL = "https:image.tmdb.org/t/p/w92";
+  const [searchQuery, setSearchQuery] = useState("");
 
+  console.log(`the original movie array: `, movies);
   const handleModalClick = (e) => {
     e.stopPropagation();
   };
 
-  //   console.log(`This log is for isOPen: `, isOpen)
-  //   console.log(`This log is for movies: `, movies)
-  //   console.log(`This log is for closeSearchModal: `, closeSearchModal)
+  const handleSearchInput = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
+  const filteredMovies = movies.filter((movie) => {
+    return (
+      searchQuery.toLowerCase() === "" ||
+      movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
+
+  console.log(filteredMovies);
   return (
     <>
       <div
@@ -43,6 +53,8 @@ const SearchModal = ({ movies, closeSearchModal }) => {
                   />
                 </div>
                 <input
+                  onChange={handleSearchInput}
+                  autoComplete="off"
                   className="block w-full p-4 pl-10 text-sm text-gray-900 rounded-lg focus:outline-none"
                   type="search"
                   name="searchMovies"
@@ -61,14 +73,16 @@ const SearchModal = ({ movies, closeSearchModal }) => {
 
             {/*body*/}
             <div className="relative text-slate-900 flex flex-col">
-              {/* <p className="px-3 py-16 self-center">No movie found</p> */}
-              <section className="MovieSearch-Hits overflow-y-auto h-96">
-                <div className="MovieSearch-Hit-source border-b border-solid px-3 py-3 font-semibold text-lg">
-                  Movies
-                </div>
-                <ul id="moviesearch-list" className="flex flex-col divide-y">
-                  {movies.map((movie) => {
-                    return (
+              {/* <div className="MovieSearch-Hit-source border-b border-solid px-3 py-3 font-semibold text-lg">
+                Movies
+              </div> */}
+              {(searchQuery.toLowerCase() !== "" && filteredMovies.length > 0) ? (
+                <section className="MovieSearch-Hits overflow-y-auto h-96">
+                  {/* <div className="MovieSearch-Hit-source border-b border-solid px-3 py-3 font-semibold text-lg">
+                    Movies
+                  </div> */}
+                  <ul id="moviesearch-list" className="flex flex-col divide-y">
+                    {filteredMovies.map((movie) => (
                       <li key={movie.id} className="MovieSearch-Hit px-3 py-3">
                         <Link to={`movies/${movie.id}`}>
                           <div className="MovieSearch-Hit-Container flex gap-x-3">
@@ -93,10 +107,47 @@ const SearchModal = ({ movies, closeSearchModal }) => {
                           </div>
                         </Link>
                       </li>
-                    );
-                  })}
-                </ul>
-              </section>
+                    ))}
+                  </ul>
+                </section>
+              ) : (
+                <section className="MovieSearch-Hits overflow-y-auto h-96 flex items-center justify-center">
+                  <div className="font-medium text-lg text-slate-500">No movie found</div>
+                </section>
+              )}
+              {/* <div className="MovieSearch-Hit-source border-b border-solid px-3 py-3 font-semibold text-lg">
+                   Movies
+                 </div>
+                 <ul id="moviesearch-list" className="flex flex-col divide-y">
+                   {movies.map((movie) => {
+                     return (
+                       <li key={movie.id} className="MovieSearch-Hit px-3 py-3">
+                         <Link to={`movies/${movie.id}`}>
+                           <div className="MovieSearch-Hit-Container flex gap-x-3">
+                             <div className="MovieSearch-Hit-Poster">
+                               <img
+                                 src={`${POSTER_BASE_URL}${movie.poster_path}`}
+                                 alt={movie.path}
+                                 style={{ width: 50, height: 75 }}
+                               />
+                             </div>
+                             <div className="MovieSearch-Hit-content-wrapper flex flex-col">
+                               <span className="MovieSearch-Hit-title font-medium">
+                                 {movie.title}
+                               </span>
+                               <span className="MovieSearch-Hit-release-year">
+                                 {movie.release_date.split("-")[0]}
+                               </span>
+                               <span className="MovieSearch-Hit-stars">
+                                 Al Pacino
+                               </span>
+                             </div>
+                           </div>
+                         </Link>
+                       </li>
+                     );
+                   })}
+                 </ul> */}
             </div>
 
             {/* footer */}
