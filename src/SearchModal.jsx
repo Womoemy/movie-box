@@ -2,13 +2,64 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const SearchModal = ({ movies, closeSearchModal }) => {
-  const POSTER_BASE_URL = "https:image.tmdb.org/t/p/w92";
+const SearchModal = ({ closeSearchModal }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
-  console.log(`the original movie array: `, movies);
+  const POSTER_BASE_URL = "https:image.tmdb.org/t/p/w92";
+  const SEARCH_URL = "https://api.themoviedb.org/3/search/movie";
+  const API_KEY = "2876d0ba5aa4f567d49e15c9d4773346";
+  const SEARCH_ENDPOINT = `${SEARCH_URL}?query=${searchQuery}&api_key=${API_KEY}&include_adult=false&language=en-US&page=1`;
+
+  const fetchSearchResults = async () => {
+    try {
+      const response = await fetch(SEARCH_ENDPOINT);
+      const data = await response.json();
+      // console.log(data);
+      const formattedData = await formatData(data.results);
+      // return console.log(formattedData);
+      setSearchResults(formattedData);
+    } catch (error) {
+      console.error("Error fetching search results: ", error);
+    }
+  };
+
+  const formatData = async (data) => {
+    return Promise.all(
+      data.map(async (movie) => {
+        const details = await fetchDetails(movie.id);
+        return {
+          ...movie,
+          details,
+        };
+      }),
+    );
+  };
+
+  const fetchDetails = async (id) => {
+    const DETAILS_URL = "https://api.themoviedb.org/3/movie";
+    const DETAILS_ENDPOINT = `${DETAILS_URL}/${id}?&append_to_response=credits&api_key=${API_KEY}`;
+    try {
+      const response = await fetch(DETAILS_ENDPOINT);
+      const data = await response.json();
+      // console.log(data);
+      return data;
+    } catch (error) {
+      console.error("Error fetching movie details: ", error);
+    }
+  };
+
+  useEffect(() => {
+    if (searchQuery.trim() !== "") {
+      fetchSearchResults();
+    } else {
+      setSearchResults([]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
+  // console.log(`the original movie array: `, movies);
   const handleModalClick = (e) => {
     e.stopPropagation();
   };
@@ -17,14 +68,6 @@ const SearchModal = ({ movies, closeSearchModal }) => {
     setSearchQuery(e.target.value);
   };
 
-  const filteredMovies = movies.filter((movie) => {
-    return (
-      searchQuery.toLowerCase() === "" ||
-      movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  });
-
-  console.log(filteredMovies);
   return (
     <>
       <div
@@ -76,13 +119,13 @@ const SearchModal = ({ movies, closeSearchModal }) => {
               {/* <div className="MovieSearch-Hit-source border-b border-solid px-3 py-3 font-semibold text-lg">
                 Movies
               </div> */}
-              {(searchQuery.toLowerCase() !== "" && filteredMovies.length > 0) ? (
+              {searchQuery.toLowerCase() !== "" && searchResults.length > 0 ? (
                 <section className="MovieSearch-Hits overflow-y-auto h-96">
                   {/* <div className="MovieSearch-Hit-source border-b border-solid px-3 py-3 font-semibold text-lg">
                     Movies
                   </div> */}
                   <ul id="moviesearch-list" className="flex flex-col divide-y">
-                    {filteredMovies.map((movie) => (
+                    {searchResults.map((movie) => (
                       <li key={movie.id} className="MovieSearch-Hit px-3 py-3">
                         <Link to={`movies/${movie.id}`}>
                           <div className="MovieSearch-Hit-Container flex gap-x-3">
@@ -100,9 +143,19 @@ const SearchModal = ({ movies, closeSearchModal }) => {
                               <span className="MovieSearch-Hit-release-year">
                                 {movie.release_date.split("-")[0]}
                               </span>
-                              <span className="MovieSearch-Hit-stars">
-                                Al Pacino
-                              </span>
+                              {movie.details && (
+                                <span className="MovieSearch-Hit-stars">
+                                  {movie.details?.credits?.cast
+                                    .filter(
+                                      (member) =>
+                                        member.known_for_department.toLowerCase() ===
+                                        "acting",
+                                    )
+                                    .slice(0, 3)
+                                    .map((actor) => actor.name)
+                                    .join(", ")}
+                                </span>
+                              )}
                             </div>
                           </div>
                         </Link>
@@ -112,7 +165,9 @@ const SearchModal = ({ movies, closeSearchModal }) => {
                 </section>
               ) : (
                 <section className="MovieSearch-Hits overflow-y-auto h-96 flex items-center justify-center">
-                  <div className="font-medium text-lg text-slate-500">No movie found</div>
+                  <div className="font-medium text-lg text-slate-500">
+                    No movie found
+                  </div>
                 </section>
               )}
               {/* <div className="MovieSearch-Hit-source border-b border-solid px-3 py-3 font-semibold text-lg">
